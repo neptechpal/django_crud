@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hello there</title>
+</head>
+<body>
+  <H3> CRUD app</H3>
+  <form method="POST", actions="/">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" name="Create task" placeholder="Enter your todo">
+  </form>
+  {%for task in tasks%}
+  <div>
+    {% comment %} <p> Hello </P> {% endcomment %}
+      <a href="{% url 'update_task' task.id %}"> Update </a>
+      <a href="{% url 'delete_task' task.id %}"> Delete </a>
+    {% if task.complete == True %}
+    {% comment %} <p>hello</p> {% endcomment %}
+    <strike>{{task.title}}<strike>
+    {% else %}
+    <span>{{task}}</span>
+    {% endif %}
+      
+  </div>
+
+
+  {% endfor %}
+  
+</body>
+</html>
